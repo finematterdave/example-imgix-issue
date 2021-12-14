@@ -31,6 +31,28 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: "@imgix/gatsby",
+      options: {
+        domain: "finematter.com",
+        secureURLToken: "A!B@C£",
+        defaultImgixParams: { auto: ["compress", "format"] },
+        sourceType: "webProxy",
+        namespace: "Finematter",
+        fields: [
+          {
+            nodeType: "Instagram",
+            fieldName: "image_imgix",
+            getURL: (node) => node.image?.url,
+          },
+          {
+            nodeType: "ShopifyProductImages",
+            fieldName: "imgix",
+            getURL: (node) => node.url,
+          },
+        ],
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
